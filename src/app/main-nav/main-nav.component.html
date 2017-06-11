@@ -1,0 +1,47 @@
+<md-sidenav-container>
+  <md-sidenav #sidenav mode="side">
+    <div *ngIf="current_lead; else noLeadSelected">
+
+      <md-card class="lead-detail-card">
+        <p>{{current_lead.data.name}}</p>
+        <p>{{current_lead.data.address}}</p>
+        <p>{{current_lead.data.phone}}</p>
+        <p>{{current_lead.data.email}}</p>
+      </md-card>
+
+      <md-card class="events-container">
+        <md-card *ngFor="let event of current_lead.getEvents()" class="event-card">
+          <p>{{event.datetime}}</p>
+          <p>{{event.type}}</p>
+          <p>{{event.details}}</p>
+          <p>{{event.user}}</p>
+        </md-card>
+      </md-card>
+
+    </div>
+    <ng-template #noLeadSelected>
+      <md-card>
+        <p>Select a lead to begin</p>
+      </md-card>
+    </ng-template>
+  </md-sidenav>
+
+  <div class="top-nav">
+    <md-card class="top-nav-card">
+
+      <md-icon *ngIf="!sidenav.opened; else closedButton" class="icon-button" (click)="toggleSideNav()">
+        chevron_right
+      </md-icon>
+      <ng-template #closedButton>
+        <md-icon class="icon-button" (click)="toggleSideNav()">
+          chevron_left
+        </md-icon>
+      </ng-template>
+    </md-card>
+  </div>
+
+  <div *ngFor="let lead of getLeads()" class="center-nav">
+    <lead [data]="lead" (selectLead)="selectLead($event)"></lead>
+  </div>
+
+</md-sidenav-container>

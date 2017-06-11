@@ -4,17 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { MaterialModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LeadComponent } from './lead/lead.component';
+import {LeadDataService} from "./lead-data.service";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainNavComponent,
+    LeadComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MaterialModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    LeadDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

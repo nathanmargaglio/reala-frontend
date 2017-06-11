@@ -1,0 +1,14 @@
+.lead-card {
+  cursor: pointer;
+}
+
+.lead-card:hover {
+  background-color: #ebfaff;
+}
+
+.selected {
+  background-color: #b3e9ff;
+}
+.selected:hover {
+  background-color: #9adeff;
+}
