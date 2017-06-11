@@ -1,0 +1,32 @@
+.datetime-text {
+  font-color: LightGray;
+  font-size: small;
+  font-weight: lighter;
+  font-style: italic;
+  float: right;
+}
+
+.message-text {
+  font-weight: bold;
+  font-size: small;
+}
+
+.event-detail {
+  font-size: small;
+}
+
+.event-detail.type {
+  font-weight: bold;
+}
+
+.event-detail.user {
+  font-weight: bold;
+  font-style: italic;
+}
+.event-detail.user:before{
+    content: "\00b7 ";
+}
+
+.event-detail.date {
+  font-weight: bold;
+}

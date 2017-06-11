@@ -1,4 +1,6 @@
 <md-sidenav-container>
+  <md-sidenav #extranav mode="side"></md-sidenav>
+<md-sidenav-container>
   <md-sidenav #sidenav mode="side">
     <div *ngIf="current_lead; else noLeadSelected">
 
@@ -9,13 +11,12 @@
         <p>{{current_lead.data.email}}</p>
       </md-card>
 
+      <md-card class="event-detail-container">
+        <event-detail *ngIf="current_event" [data]="current_event.data"></event-detail>
+      </md-card>
+
       <md-card class="events-container">
-        <md-card *ngFor="let event of current_lead.getEvents()" class="event-card">
-          <p>{{event.datetime}}</p>
-          <p>{{event.type}}</p>
-          <p>{{event.details}}</p>
-          <p>{{event.user}}</p>
-        </md-card>
+        <event *ngFor="let e of current_lead.getEvents()" [data]="e" (eventFocus)="selectEvent($event)"></event>
       </md-card>
 
     </div>
@@ -41,7 +42,8 @@
   </div>
 
   <div *ngFor="let lead of getLeads()" class="center-nav">
-    <lead [data]="lead" (selectLead)="selectLead($event)"></lead>
+    <lead [data]="lead" (leadFocus)="selectLead($event)"></lead>
   </div>
 
+</md-sidenav-container>
 </md-sidenav-container>

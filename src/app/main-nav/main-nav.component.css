@@ -11,6 +11,10 @@ md-sidenav {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
+md-sidenav.large {
+  width: 50%;
+}
+
 md-sidenav > div {
   height: 100%;
   display: flex;

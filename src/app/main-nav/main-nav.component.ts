@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewChildren, Input } from '@angular/core
 import {MdSidenav} from "@angular/material";
 import {LeadDataService} from "../lead-data.service";
 import {LeadComponent} from "../lead/lead.component";
+import {EventComponent} from "../event/event.component"
 
 @Component({
   selector: 'main-nav',
@@ -11,8 +12,11 @@ import {LeadComponent} from "../lead/lead.component";
 export class MainNavComponent implements OnInit {
 
   @ViewChild('sidenav') public sidenav: MdSidenav;
+  @ViewChild('extranav') public extranav: MdSidenav;
   @ViewChildren(LeadComponent) public leads: LeadComponent;
+
   public current_lead: LeadComponent = null;
+  public current_event: EventComponent = null;
 
   public sidenav_button_icon: string;
 
@@ -27,6 +31,10 @@ export class MainNavComponent implements OnInit {
     this.sidenav.toggle();
   }
 
+  public toggleExtraNav(event) {
+    this.extranav.toggle();
+  }
+
   public getLeads(){
     return this.leadData.getLeads()
   }
@@ -39,5 +47,9 @@ export class MainNavComponent implements OnInit {
     }
     this.current_lead = lead_data;
     this.sidenav.open();
+  }
+
+  public selectEvent(event_data) {
+    this.current_event = event_data;
   }
 }

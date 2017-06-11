@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LeadDataService {
 
-  public _leads: any[] = []
+  public _leads: any[] = [];
 
   constructor() {
     for (var i = 0; i < 10; ++i){
@@ -22,11 +22,9 @@ export class LeadDataService {
 
   public getEvents(){
     var events = [];
-
     for( var i=0; i < Math.floor(Math.random() * 3) + 2; i++ ) {
       events.push(this.makeEvent())
     }
-
     return events
   }
 
@@ -100,7 +98,15 @@ export class LeadDataService {
 
   public makeEvent() {
     var event = {};
-    var date = new Date();
+
+    var dates = [
+      "June 10, 2017 22:13:00",
+      "June 11, 2017 00:20:00",
+      "June 09, 2017 13:49:00",
+      "June 10, 2017 17:39:00",
+    ];
+    var picked_date = dates[Math.floor(Math.random() * dates.length)];
+    var date = new Date(picked_date);
 
     var types = ['claimed','called','mailed','emailed','other'];
     var type = types[Math.floor(Math.random() * types.length)]
@@ -110,7 +116,12 @@ export class LeadDataService {
     var users = ['Nate', 'Sebe', 'Kenny', 'Ray']
     var user = users[Math.floor(Math.random() * users.length)]
 
-    return {'datetime':date, 'type': type, 'details': details, 'user': user}
+    return {
+      'datetime':date,
+      'type': type,
+      'details': details,
+      'user': user
+    }
   }
 
 }

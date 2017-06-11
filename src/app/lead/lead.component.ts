@@ -18,7 +18,7 @@ export class LeadComponent implements OnInit {
     'email':''
   };
 
-  @Output() selectLead = new EventEmitter<LeadComponent>();
+  @Output() leadFocus = new EventEmitter<LeadComponent>();
 
   constructor(public leadData: LeadDataService) { }
 
@@ -26,16 +26,16 @@ export class LeadComponent implements OnInit {
   }
 
   ngOnChanges(){
-    console.log("Change!")
   }
 
   selectThis() {
     this.selected = true;
     this.loadEvents();
-    this.selectLead.emit(this);
+    this.leadFocus.emit(this);
   }
 
   loadEvents() {
+    this.events = [];
     for( let event of this.leadData.getEvents()){
       this.events.push(event);
     }
@@ -44,5 +44,4 @@ export class LeadComponent implements OnInit {
   getEvents(){
     return this.events
   }
-
 }
