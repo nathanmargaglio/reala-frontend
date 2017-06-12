@@ -25,6 +25,16 @@ md-sidenav-container {
   height: 100%;
 }
 
+.top-nav-card {
+  display: flex;
+}
+.nav-button-container.left {
+  width: 50%;
+}
+.nav-button-container.right {
+  flex: 1;
+  text-align: right;
+}
 .icon-button {
   cursor: pointer;
 }
@@ -34,4 +44,8 @@ md-sidenav-container {
   flex: 1;
   overflow-x: hidden;
   overflow-y: scroll;
+}
+
+.add-button {
+  float: right;
 }

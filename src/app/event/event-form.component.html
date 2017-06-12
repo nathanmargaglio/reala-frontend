@@ -1,0 +1,12 @@
+
+<md-select placeholder="Contact Type" [(ngModel)]="input_type" name="type">
+  <md-option *ngFor="let t of type_options" [value]="t.value">
+    {{t.viewValue}}
+  </md-option>
+</md-select>
+
+<md-input-container class="input-details-container">
+  <textarea mdInput [(ngModel)]="input_details" name="input_details" placeholder="Notes..."></textarea>
+</md-input-container>
+
+<button md-raised-button (click)="submitForm()">SUBMIT</button>

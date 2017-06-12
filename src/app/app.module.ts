@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LeadComponent } from './lead/lead.component';
 import {LeadDataService} from "./lead-data.service";
-import {EventComponent, EventDetailComponent} from './event/event.component';
+import {EventComponent, EventDetailComponent, EventFormComponent} from './event/event.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import {EventComponent, EventDetailComponent} from './event/event.component';
     MainNavComponent,
     LeadComponent,
     EventComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    EventFormComponent
   ],
   imports: [
     BrowserModule,

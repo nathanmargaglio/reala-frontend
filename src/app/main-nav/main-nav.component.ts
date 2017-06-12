@@ -11,28 +11,26 @@ import {EventComponent} from "../event/event.component"
 })
 export class MainNavComponent implements OnInit {
 
-  @ViewChild('sidenav') public sidenav: MdSidenav;
-  @ViewChild('extranav') public extranav: MdSidenav;
+  @ViewChild('rightnav') public rightnav: MdSidenav;
+  @ViewChild('leftnav') public leftnav: MdSidenav;
   @ViewChildren(LeadComponent) public leads: LeadComponent;
 
   public current_lead: LeadComponent = null;
   public current_event: EventComponent = null;
 
-  public sidenav_button_icon: string;
-
   constructor(public leadData: LeadDataService) {
-    this.sidenav_button_icon = "chevron_right";
+    console.log(this.rightnav)
   }
 
   ngOnInit() {
   }
 
-  public toggleSideNav(event) {
-    this.sidenav.toggle();
+  public toggleRightNav(event) {
+    this.rightnav.toggle();
   }
 
-  public toggleExtraNav(event) {
-    this.extranav.toggle();
+  public toggleLeftNav(event) {
+    this.leftnav.toggle();
   }
 
   public getLeads(){
@@ -45,11 +43,25 @@ export class MainNavComponent implements OnInit {
         lead.selected = false;
       }
     }
+    this.current_event = null;
     this.current_lead = lead_data;
-    this.sidenav.open();
+    this.rightnav.open();
   }
 
   public selectEvent(event_data) {
     this.current_event = event_data;
+  }
+
+  public addEvent(event_data) {
+    var data = event_data.data;
+    data['lead'] = this.current_lead.data._id;
+    this.leadData._event_POST(data);
+
+    this.current_lead.pushEvent(data);
+    this.current_event = event_data;
+  }
+
+  public createEvent() {
+    this.current_event = null;
   }
 }

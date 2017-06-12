@@ -45,9 +45,10 @@ export class EventComponent implements OnInit {
 
   public getSimpleDatetime(){
     var d = this.data;
+    var dt = new Date(d.datetime)
     var date = this.current_datetime;
 
-    var diff = (date.getTime() - d.datetime.getTime())/ 1000 / 60; //in minutes
+    var diff = (date.getTime() - dt.getTime())/ 1000 / 60; //in minutes
 
     if (diff < 1 ) {
       return "(>1m)"
@@ -57,7 +58,7 @@ export class EventComponent implements OnInit {
       return "(" + Math.floor(diff/60) + 'h)'
     }
 
-    return "(" + this.pipe.transform(d.datetime, 'MMM d') + ")"
+    return "(" + this.pipe.transform(dt, 'MMM d') + ")"
   }
 }
 
@@ -72,6 +73,42 @@ export class EventDetailComponent extends EventComponent {
   }
 
   ngOnChange() {
-    console.log("!!!")
+  }
+}
+
+@Component({
+  selector: 'event-form',
+  templateUrl: './event-form.component.html',
+  styleUrls: ['./event.component.css']
+})
+export class EventFormComponent extends EventComponent {
+
+  public input_type = null;
+  public input_details = null;
+
+  public type_options = [
+    {value: 'claimed', viewValue: 'Claimed'},
+    {value: 'called', viewValue: 'Called'},
+    {value: 'mailed', viewValue: 'Mailed'},
+    {value: 'emailed', viewValue: 'Emailed'},
+    {value: 'other', viewValue: 'Other'},
+  ]
+
+  constructor(public leadService:LeadDataService, public pipe: DatePipe){
+    super(leadService, pipe);
+  }
+
+  ngOnChange() {
+  }
+
+  public submitForm() {
+    this.data = {
+      'datetime': new Date(),
+      'type':this.input_type,
+      'details':this.input_details,
+      'user':'User'
+    };
+
+    this.eventFocus.emit(this)
   }
 }

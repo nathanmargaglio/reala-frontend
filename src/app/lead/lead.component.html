@@ -1,3 +1,3 @@
 <md-card class="lead-card" (click)="selectThis()" [ngClass]="{'selected': selected}">
-  {{data.address}}
+  <span>{{data.address}}, </span><span>{{data.city}} {{data.state}}</span>
 </md-card>

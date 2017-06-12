@@ -9,11 +9,14 @@ import {LeadDataService} from "../lead-data.service";
 export class LeadComponent implements OnInit {
   public name: string;
   public selected: boolean = false;
-  public events: any[] = [];
+  public events: any[] = null;
 
   @Input() data: any = {
+    '_id':'',
     'name':'',
     'address':'',
+    'city':'',
+    'state':'',
     'phone':'',
     'email':''
   };
@@ -34,11 +37,29 @@ export class LeadComponent implements OnInit {
     this.leadFocus.emit(this);
   }
 
-  loadEvents() {
-    this.events = [];
-    for( let event of this.leadData.getEvents()){
-      this.events.push(event);
+  pushEvent(event) {
+    if (!this.events) {
+      this.events = [];
     }
+    this.events.unshift(event)
+    return event
+  }
+
+  appendEvents(events) {
+    this.events = []
+    for (let e of events) {
+      this.pushEvent(e)
+    }
+  }
+
+  loadEvents() {
+    var _id = this.data._id
+    this.leadData._event_GET('{"lead":"' + _id + '"}')
+    .subscribe(
+        data => this.appendEvents(data),
+        err => console.error(err),
+        () => console.log("Event Get Complete!")
+      )
   }
 
   getEvents(){

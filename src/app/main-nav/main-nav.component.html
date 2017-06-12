@@ -1,49 +1,77 @@
 <md-sidenav-container>
-  <md-sidenav #extranav mode="side"></md-sidenav>
-<md-sidenav-container>
-  <md-sidenav #sidenav mode="side">
-    <div *ngIf="current_lead; else noLeadSelected">
+  <md-sidenav #leftnav mode="side">
 
-      <md-card class="lead-detail-card">
-        <p>{{current_lead.data.name}}</p>
-        <p>{{current_lead.data.address}}</p>
-        <p>{{current_lead.data.phone}}</p>
-        <p>{{current_lead.data.email}}</p>
-      </md-card>
-
-      <md-card class="event-detail-container">
-        <event-detail *ngIf="current_event" [data]="current_event.data"></event-detail>
-      </md-card>
-
-      <md-card class="events-container">
-        <event *ngFor="let e of current_lead.getEvents()" [data]="e" (eventFocus)="selectEvent($event)"></event>
-      </md-card>
-
-    </div>
-    <ng-template #noLeadSelected>
-      <md-card>
-        <p>Select a lead to begin</p>
-      </md-card>
-    </ng-template>
   </md-sidenav>
+  <md-sidenav-container>
+    <md-sidenav #rightnav mode="side" align="end">
+      <div *ngIf="current_lead; else noLeadSelected">
 
-  <div class="top-nav">
-    <md-card class="top-nav-card">
+        <md-card class="lead-detail-card">
+          <button md-mini-fab class="add-button" (click)="createEvent()">
+            <md-icon>add</md-icon>
+          </button>
+          <p>{{current_lead.data.name}}</p>
+          <p>{{current_lead.data.address}}</p>
+          <p>{{current_lead.data.city}}, {{current_lead.data.state}}</p>
+          <p>{{current_lead.data.phone}}</p>
+          <p>{{current_lead.data.email}}</p>
+        </md-card>
 
-      <md-icon *ngIf="!sidenav.opened; else closedButton" class="icon-button" (click)="toggleSideNav()">
-        chevron_right
-      </md-icon>
-      <ng-template #closedButton>
-        <md-icon class="icon-button" (click)="toggleSideNav()">
-          chevron_left
-        </md-icon>
+        <md-card class="event-detail-container">
+          <ng-container *ngIf="current_event; then eventDetail; else eventForm"></ng-container>
+          <ng-template #eventDetail>
+            <event-detail [data]="current_event.data"></event-detail>
+          </ng-template>
+          <ng-template #eventForm>
+            <event-form (eventFocus)="addEvent($event)"></event-form>
+          </ng-template>
+        </md-card>
+
+        <md-card class="events-container">
+          <event *ngFor="let e of current_lead.getEvents()" [data]="e" (eventFocus)="selectEvent($event)"></event>
+        </md-card>
+
+      </div>
+
+      <ng-template #noLeadSelected>
+        <md-card>
+          <p>Select a Lead.</p>
+        </md-card>
       </ng-template>
-    </md-card>
-  </div>
 
-  <div *ngFor="let lead of getLeads()" class="center-nav">
-    <lead [data]="lead" (leadFocus)="selectLead($event)"></lead>
-  </div>
+    </md-sidenav>
 
-</md-sidenav-container>
+    <div class="top-nav">
+      <md-card class="top-nav-card">
+
+        <div class="nav-button-container left">
+          <md-icon *ngIf="!leftnav.opened; else closeLeftButton" class="icon-button" (click)="toggleLeftNav()">
+            chevron_right
+          </md-icon>
+          <ng-template #closeLeftButton>
+            <md-icon class="icon-button" (click)="toggleLeftNav()">
+              chevron_left
+            </md-icon>
+          </ng-template>
+        </div>
+
+        <div class="nav-button-container right">
+          <md-icon *ngIf="!rightnav.opened; else closeRightButton" class="icon-button" (click)="toggleRightNav()">
+            chevron_left
+          </md-icon>
+          <ng-template #closeRightButton>
+            <md-icon class="icon-button" (click)="toggleRightNav()">
+              chevron_right
+            </md-icon>
+          </ng-template>
+        </div>
+
+      </md-card>
+    </div>
+
+    <div *ngFor="let lead of getLeads()" class="center-nav">
+      <lead [data]="lead" (leadFocus)="selectLead($event)"></lead>
+    </div>
+
+  </md-sidenav-container>
 </md-sidenav-container>

@@ -2,6 +2,10 @@
   cursor: pointer;
 }
 
+.lead-card > span {
+  font-size: small;
+}
+
 .lead-card:hover {
   background-color: #ebfaff;
 }
