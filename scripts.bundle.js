@@ -7,7 +7,7 @@ module.exports = "/*! Hammer.JS - v2.0.7 - 2016-04-22\n * http://hammerjs.github
 
 /***/ }),
 
-/***/ 212:
+/***/ 213:
 /***/ (function(module, exports) {
 
 /*
@@ -24,7 +24,7 @@ module.exports = function(src) {
 
 /***/ }),
 
-/***/ 219:
+/***/ 220:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(88);
@@ -35,9 +35,9 @@ module.exports = __webpack_require__(88);
 /***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(212)(__webpack_require__(156))
+__webpack_require__(213)(__webpack_require__(156))
 
 /***/ })
 
-},[219]);
+},[220]);
 //# sourceMappingURL=scripts.bundle.js.map
